@@ -5,7 +5,8 @@ import './Header.css';
 const Header = () => {
   return (
     <header className="header">
-      <div className="logo">Travel Planner</div>
+      {/* Wrap the logo text inside Link component */}
+      <Link to="/" className="logo">Travel Planner</Link>
       <nav>
         <Link to="/">Home</Link>
         <Link to="/dashboard">Dashboard</Link>

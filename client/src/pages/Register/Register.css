@@ -1,0 +1,90 @@
+/* Register.css */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+  }
+  
+  .register-box {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    text-align: center;
+  }
+  
+  .register-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .input-wrapper {
+    position: relative;
+  }
+  
+  .falling-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+  }
+  
+  .falling-input:focus {
+    border-color: #764ba2;
+    outline: none;
+    animation: letterFall 0.5s ease-in-out forwards;
+  }
+  
+  .register-btn {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: white;
+    background: #764ba2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  
+  .register-btn:hover {
+    background: #5c3c91;
+    transform: scale(1.05);
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes letterFall {
+    0% {
+      letter-spacing: 2px;
+      opacity: 0.5;
+    }
+    100% {
+      letter-spacing: 0;
+      opacity: 1;
+    }
+  }
+  

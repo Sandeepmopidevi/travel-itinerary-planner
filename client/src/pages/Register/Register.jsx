@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import './Register.css';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -25,32 +27,47 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={handleRegister}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Register</button>
-      </form>
+    <div className="register-container">
+      <div className="register-box">
+        <h1 className="register-title">Create an Account</h1>
+        <form onSubmit={handleRegister} className="register-form">
+          <div className="input-wrapper">
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="falling-input"
+            />
+          </div>
+          <div className="input-wrapper">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="falling-input"
+            />
+          </div>
+          <div className="input-wrapper">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="falling-input"
+            />
+          </div>
+          <button type="submit" className="register-btn">Register</button>
+        </form>
+        <p className="register-login-prompt">
+          Already have an account?{' '}
+          <Link to="/login" className="login-link">Login here</Link>
+        </p>
+      </div>
     </div>
   );
 };
