@@ -8,6 +8,7 @@ import Register from './pages/Register/Register';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Profile from './pages/Profile/Profile';
 import Itinerary from './pages/Itinerary/Itinerary';
+import CreateItinerary from './components/CreateItinerary/CreateItinerary'; // New page for creating an itinerary
 import Collaborate from './pages/Collaborate/Collaborate';
 import NotFound from './pages/NotFound/NotFound';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
@@ -46,6 +47,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Itinerary />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/itinerary/new" // New route for creating itineraries
+              element={
+                <ProtectedRoute>
+                  <CreateItinerary />
                 </ProtectedRoute>
               }
             />

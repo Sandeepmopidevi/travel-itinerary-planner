@@ -1,3 +1,5 @@
+// server.js
+
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -18,14 +20,15 @@ app.use(express.json());
 
 // MongoDB Connection
 mongoose
-.connect(process.env.MONGO_URI)
-.then(() => console.log('MongoDB Connected'))
-.catch((err) => console.error('MongoDB connection error:', err));
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB Connected'))
+  .catch((err) => console.error('MongoDB connection error:', err));
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/itineraries', itineraryRoutes);
+app.use('/api/itineraries', itineraryRoutes); // Only one instance of itineraryRoutes
 app.use('/api/dashboard', dashboardRoutes);
+
 // 404 Handler
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });

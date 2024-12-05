@@ -1,31 +1,16 @@
 const express = require('express');
+const { createItinerary, getItineraries, getItineraryById } = require('../controllers/itineraryController');
+const authMiddleware = require('../middleware/authMiddleware');
+
 const router = express.Router();
-const verifyToken = require('../middleware/authMiddleware');
 
-// Route to fetch a specific itinerary
-router.get('/:id', verifyToken, (req, res) => {
-  const { id } = req.params;
+// Create a new itinerary
+router.post('/new', authMiddleware, createItinerary);
 
-  try {
-    // Example response
-    res.json({ title: `Itinerary ${id}`, description: `Description for itinerary ${id}` });
-  } catch (error) {
-    console.error('Error fetching itinerary:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-});
+// Get all itineraries
+router.get('/', authMiddleware, getItineraries);
 
-// Route to create a new itinerary
-router.post('/new', verifyToken, (req, res) => {
-  const { name, description } = req.body;
-
-  try {
-    // Example response
-    res.status(201).json({ id: 'new', name, description });
-  } catch (error) {
-    console.error('Error creating itinerary:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-});
+// Get a specific itinerary by ID
+router.get('/:id', authMiddleware, getItineraryById);
 
 module.exports = router;
