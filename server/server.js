@@ -6,6 +6,7 @@ const cors = require('cors');
 // Routes
 const authRoutes = require('./routes/authRoutes');
 const itineraryRoutes = require('./routes/itineraryRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
 
 dotenv.config();
 
@@ -24,7 +25,7 @@ mongoose
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/itineraries', itineraryRoutes);
-
+app.use('/api/dashboard', dashboardRoutes);
 // 404 Handler
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });

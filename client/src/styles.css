@@ -41,13 +41,17 @@
   
   /* Responsive Design */
   @media (max-width: 768px) {
-    .content {
-      padding: 10px;
+    .header nav {
+      flex-direction: column;
+      gap: 10px;
     }
   
-    .navbar {
-      flex-direction: column;
-      text-align: center;
+    .header {
+      padding: 10px 15px;
+    }
+  
+    .footer {
+      font-size: 0.7rem;
     }
   }
   

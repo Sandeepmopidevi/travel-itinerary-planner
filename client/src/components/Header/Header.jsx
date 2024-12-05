@@ -5,12 +5,12 @@ import './Header.css';
 const Header = () => {
   return (
     <header className="header">
-      <Link to="/" className="logo">
-        Travel Planner
-      </Link>
+      <div className="logo">Travel Planner</div>
       <nav>
+        <Link to="/">Home</Link>
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/itinerary/new">Create Itinerary</Link>
+        <Link to="/collaborate">Collaborate</Link>
       </nav>
     </header>
   );

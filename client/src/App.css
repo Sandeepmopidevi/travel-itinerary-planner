@@ -44,3 +44,7 @@ input:focus {
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
+body {
+  margin: 0;
+  padding: 0;
+}

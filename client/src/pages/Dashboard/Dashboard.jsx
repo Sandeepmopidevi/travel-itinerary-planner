@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('token');
       if (!token) {
-        // Redirect to login if no token
-        window.location.href = '/login';
+        navigate('/login'); // Redirect if no token
         return;
       }
 
@@ -17,28 +19,34 @@ const Dashboard = () => {
         const response = await fetch('http://localhost:5000/api/auth/me', {
           headers: {
             Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
           },
         });
 
         if (!response.ok) {
-          throw new Error('Failed to fetch user data');
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to fetch user data');
         }
 
         const userData = await response.json();
         setUser(userData);
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-        window.location.href = '/login'; // Redirect to login on error
+      } catch (err) {
+        setError(err.message);
+        navigate('/login'); // Redirect to login on error
       } finally {
         setLoading(false);
       }
     };
 
     fetchUserData();
-  }, []);
+  }, [navigate]);
 
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
   }
 
   return (
@@ -46,7 +54,7 @@ const Dashboard = () => {
       <h2>Dashboard</h2>
       {user ? (
         <div>
-          <p>Welcome, {user.name} Plan Your Trip Here.</p>
+          <p>Welcome, {user.name}! Plan your trip here.</p>
         </div>
       ) : (
         <p>No user data available</p>
