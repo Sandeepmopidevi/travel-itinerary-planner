@@ -1,45 +1,79 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Dashboard.css';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
+  const [itineraries, setItineraries] = useState([]);
+  const [collaborations, setCollaborations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchDashboardData = async () => {
       const token = localStorage.getItem('token');
       if (!token) {
-        navigate('/login'); // Redirect if no token
+        navigate('/login'); // Redirect if not logged in
         return;
       }
 
       try {
-        const response = await fetch('http://localhost:5000/api/auth/me', {
+        // Fetch user data
+        const userResponse = await fetch('http://localhost:5000/api/auth/me', {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         });
 
-        if (!response.ok) {
-          const errorData = await response.json();
+        if (!userResponse.ok) {
+          const errorData = await userResponse.json();
           throw new Error(errorData.message || 'Failed to fetch user data');
         }
 
-        const userData = await response.json();
+        const userData = await userResponse.json();
         setUser(userData);
+
+        // Fetch itineraries
+        const itineraryResponse = await fetch('http://localhost:5000/api/itineraries', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (itineraryResponse.ok) {
+          const itineraryData = await itineraryResponse.json();
+          setItineraries(itineraryData);
+        }
+
+        // Fetch collaborations
+        const collaborationResponse = await fetch('http://localhost:5000/api/collaborations', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (collaborationResponse.ok) {
+          const collaborationData = await collaborationResponse.json();
+          setCollaborations(collaborationData);
+        }
       } catch (err) {
         setError(err.message);
-        navigate('/login'); // Redirect to login on error
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUserData();
+    fetchDashboardData();
   }, [navigate]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -50,15 +84,51 @@ const Dashboard = () => {
   }
 
   return (
-    <div>
-      <h2>Dashboard</h2>
-      {user ? (
-        <div>
-          <p>Welcome, {user.name}! Plan your trip here.</p>
-        </div>
-      ) : (
-        <p>No user data available</p>
-      )}
+    <div className="dashboard-container">
+      <header className="dashboard-header">
+        <h1>Welcome, {user?.name}!</h1>
+        <button onClick={handleLogout} className="logout-button">
+          Logout
+        </button>
+      </header>
+
+      <section className="dashboard-section">
+        <h2>Your Itineraries</h2>
+        {itineraries.length > 0 ? (
+          <div className="itinerary-list">
+            {itineraries.map((itinerary) => (
+              <div key={itinerary.id} className="itinerary-card">
+                <h3>{itinerary.name}</h3>
+                <p>{itinerary.description}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No itineraries found. Start by creating one!</p>
+        )}
+        <button
+          className="create-itinerary-button"
+          onClick={() => navigate('/itinerary/new')}
+        >
+          Create New Itinerary
+        </button>
+      </section>
+
+      <section className="dashboard-section">
+        <h2>Collaborations</h2>
+        {collaborations.length > 0 ? (
+          <div className="collaboration-list">
+            {collaborations.map((collab) => (
+              <div key={collab.id} className="collaboration-card">
+                <h3>{collab.name}</h3>
+                <p>Shared by: {collab.sharedBy}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No collaborations available.</p>
+        )}
+      </section>
     </div>
   );
 };

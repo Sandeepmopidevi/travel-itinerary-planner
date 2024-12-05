@@ -1,0 +1,99 @@
+/* Container styling */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Scroll effect header */
+  .scroll-effect {
+    height: 5px;
+    width: 100%;
+    background: linear-gradient(to right, #6200ea, #03dac6);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    animation: scrollBar 2s infinite;
+  }
+  
+  @keyframes scrollBar {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 0%;
+    }
+  }
+  
+  /* Heading */
+  .container h2 {
+    font-size: 1.8rem;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Form styling */
+  .container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .container form input,
+  .container form textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    box-sizing: border-box;
+    transition: border 0.3s;
+  }
+  
+  .container form input:focus,
+  .container form textarea:focus {
+    border-color: #6200ea;
+  }
+  
+  /* Textarea customization */
+  .container form textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  /* Button styling */
+  .container form button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #6200ea;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .container form button:hover {
+    background-color: #3700b3;
+  }
+  
+  /* Message styling */
+  .container .success {
+    color: #2e7d32;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .container .error {
+    color: #d32f2f;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
