@@ -9,6 +9,8 @@ const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const itineraryRoutes = require('./routes/itineraryRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
+const userRoutes = require('./routes/userRoutes');
+const collaborationRoutes = require('./routes/collaborationRoutes');
 
 dotenv.config();
 
@@ -28,7 +30,8 @@ mongoose
 app.use('/api/auth', authRoutes);
 app.use('/api/itineraries', itineraryRoutes); // Only one instance of itineraryRoutes
 app.use('/api/dashboard', dashboardRoutes);
-
+app.use('/api/users', userRoutes); // Add the users route
+app.use('/api/collaborations', collaborationRoutes); // Add the collaborations route
 // 404 Handler
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });

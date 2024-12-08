@@ -6,7 +6,10 @@
     min-height: 100vh;
     padding: 20px;
   }
-  
+  .dashboard {
+    font-family: 'YourFont', sans-serif;  /* Make sure the font is loaded */
+    color: #333;  /* Ensure the text color isn't the same as the background */
+  }
   /* Header */
   .dashboard-header {
     text-align: center;

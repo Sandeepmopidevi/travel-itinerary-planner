@@ -119,9 +119,8 @@ const Dashboard = () => {
         {collaborations.length > 0 ? (
           <div className="collaboration-list">
             {collaborations.map((collab) => (
-              <div key={collab.id} className="collaboration-card">
-                <h3>{collab.name}</h3>
-                <p>Shared by: {collab.sharedBy}</p>
+              <div key={collab._id} className="collaboration-card">
+                <p>Shared by: {collab.collaborators.map((collaborator) => collaborator.name).join(', ')}</p>
               </div>
             ))}
           </div>
