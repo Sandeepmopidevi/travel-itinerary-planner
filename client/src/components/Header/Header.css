@@ -1,24 +1,109 @@
+/* Base Header Styling */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+}
+
+.header .logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.header nav {
+  display: flex;
+  align-items: center;
+}
+
+.header nav a {
+  margin-left: 15px;
+  color: white;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.header nav a:hover {
+  text-decoration: underline;
+}
+
+.header nav a:active {
+  transform: scale(0.95);
+  color: #ffcc00;
+  transition: transform 0.1s ease, color 0.2s ease;
+}
+
+.header nav a:focus {
+  outline: none;
+}
+
+/* Responsive Styling for Mobile and Medium Screens */
+@media (max-width: 768px) {
+  .header {
+    padding: 10px 15px; /* Smaller padding on medium screens */
   }
-  
+
   .header .logo {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
+    font-size: 18px; /* Slightly smaller logo text */
   }
-  
+
+  .header nav {
+    display: none; /* Hide navigation by default on mobile */
+    flex-direction: column; /* Stack the links vertically */
+    width: 100%;
+    background-color: #007bff; /* Same background color as header */
+    position: absolute;
+    top: 50px; /* Position below the header */
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .header nav.open {
+    display: flex; /* Show the nav links when the menu is open */
+  }
+
   .header nav a {
-    margin-left: 15px;
+    margin: 10px 0; /* Add space between links */
+  }
+
+  /* Show hamburger icon only on mobile */
+  .header .menu-icon {
+    display: block; /* Show hamburger menu on mobile */
+    cursor: pointer;
+    font-size: 30px;
     color: white;
   }
-  
-  .header nav a:hover {
-    text-decoration: underline;
+
+  .header .menu-icon.open {
+    color: #ffcc00; /* Change color when menu is open */
   }
-  
+}
+
+/* Hide the hamburger icon on large screens (desktop) */
+@media (min-width: 769px) {
+  .header .menu-icon {
+    display: none; /* Hide the hamburger icon on desktop */
+  }
+}
+
+/* Responsive Styling for Small Screens */
+@media (max-width: 480px) {
+  .header {
+    padding: 10px 10px; /* Smaller padding for very small screens */
+  }
+
+  .header .logo {
+    font-size: 16px; /* Even smaller logo text */
+  }
+
+  .header nav a {
+    font-size: 14px; /* Smaller font size for mobile */
+  }
+}
